@@ -31,6 +31,15 @@ function convertKelvinToFahrenheit(kelvin) {
 }
 
 function getTemperature(data) {
+  const cityName = document.getElementById("city-name");
+  cityName.innerText = data.name;
+
+  const weatherIcon = document.getElementById("weather-icon");
+  const weatherIconCode = data.weather[0].icon
+  const weatherIconDesc = data.weather[0].description
+  const weatherIconURL = `https://openweathermap.org/img/wn/${weatherIconCode}@4x.png`
+  weatherIcon.innerHTML = `<img src="${weatherIconURL}" alt="${weatherIconDesc}">`
+
   const temperatureElement = document.getElementById("temperature-result");
   const temp = convertKelvinToFahrenheit(data.main.temp);
   const feelsLike = convertKelvinToFahrenheit(data.main.feels_like);
