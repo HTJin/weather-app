@@ -35,29 +35,30 @@ function getTemperature(data) {
   cityName.innerText = data.name;
 
   const weatherIcon = document.getElementById("weather-icon");
-  const weatherIconCode = data.weather[0].icon
-  const weatherIconDesc = data.weather[0].description
-  const weatherIconURL = `https://openweathermap.org/img/wn/${weatherIconCode}@4x.png`
-  weatherIcon.innerHTML = `<img src="${weatherIconURL}" alt="${weatherIconDesc}">`
+  const weatherIconCode = data.weather[0].icon;
+  const weatherIconDesc = data.weather[0].description;
+  const weatherIconURL = `https://openweathermap.org/img/wn/${weatherIconCode}@4x.png`;
+  weatherIcon.innerHTML = `
+    <img src="${weatherIconURL}" alt="${weatherIconDesc}">
+    <div class="text-center -mt-8">${weatherIconDesc}</div>
+  `;
 
   const temperatureElement = document.getElementById("temperature-result");
   const temp = convertKelvinToFahrenheit(data.main.temp);
-  const feelsLike = convertKelvinToFahrenheit(data.main.feels_like);
   const tempMin = convertKelvinToFahrenheit(data.main.temp_min);
   const tempMax = convertKelvinToFahrenheit(data.main.temp_max);
   const humidity = data.main.humidity;
 
   temperatureElement.innerHTML = `
       <div class="flex flex-col items-end">
-          <div>Temperature: <span class="text-cyan-400">${temp}°F</span></div>
-          <div>(Feels like): <span class="text-green-500">${feelsLike}°F</span></div>
+          <div>Temperature: <span class="text-cyan-400 font-bold">${temp}°F</span></div>
       </div>
       <div class="flex flex-col">
-          <div>Min: <span class="text-blue-500">${tempMin}°F</span></div>
-          <div>Max: <span class="text-red-500">${tempMax}°F</span></div>
+          <div>Min: <span class="text-blue-600 font-bold">${tempMin}°F</span></div>
+          <div>Max: <span class="text-red-500 font-bold">${tempMax}°F</span></div>
       </div>
       <div class="flex">
-          <div>Humidity: ${humidity}</div>
+          <div>Humidity: <span class="text-emerald-500 font-bold">${humidity}</span></div>
       </div>
   `;
 }
